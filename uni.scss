@@ -1,0 +1,75 @@
+@import '@/uni_modules/uni-scss/variables.scss';
+
+$box-shadow: 0 20rpx 20rpx -20rpx rgba($color: #333, $alpha: 0.1);
+*{
+	box-sizing: border-box;
+}
+
+/* 行为相关颜色 */
+$color-primary: #DBA871;
+$color-success: #4cd964;
+$color-warning: #f0ad4e;
+$color-error: #dd524d;
+
+/* 文字基本颜色 */
+$text-color-base: #343434; //基本色
+$text-color-inverse: #fff; //反色
+$text-color-assist: #999; //辅助灰色，如加载更多的提示信息
+$text-color-warning: #432A21;
+$text-color-grey: #666;
+$text-color-placeholder: #808080;
+$text-color-disable: #c0c0c0;
+
+/* 背景颜色 */
+$bg-color: #F8F8F8;
+$bg-color-white: #ffffff;
+$bg-color-grey: #f9f9f9;
+$bg-color-hover: #f1f1f1; //点击状态颜色
+$bg-color-mask: rgba(0, 0, 0, 0.4); //遮罩颜色
+
+/* 边框颜色 */
+$border-color: #c8c7cc;
+
+/* 尺寸变量 */
+
+/* 文字尺寸 */
+$font-size-extra-sm: 22rpx;
+$font-size-sm: 24rpx;
+$font-size-base: 26rpx;
+$font-size-medium: 28rpx;
+$font-size-lg: 32rpx;
+$font-size-extra-lg: 36rpx;
+
+/* 图片尺寸 */
+$img-size-sm: 40rpx;
+$img-size-base: 52rpx;
+$img-size-lg: 80rpx;
+
+/* Border Radius */
+$border-radius-sm: 4rpx;
+$border-radius-base: 6rpx;
+$border-radius-lg: 12rpx;
+$border-radius-circle: 50%;
+
+/* 水平间距 */
+$spacing-row-sm: 10rpx;
+$spacing-row-base: 20rpx;
+$spacing-row-lg: 30rpx;
+
+/* 垂直间距 */
+$spacing-col-sm: 10rpx;
+$spacing-col-base: 20rpx;
+$spacing-col-lg: 30rpx;
+
+/* 透明度 */
+$opacity-disabled: 0.3; // 组件禁用态的透明度
+
+$box-shadow: 0 20rpx 20rpx -20rpx rgba($color: #333, $alpha: 0.1);
+
+/* 文章场景相关 */
+$color-title: #2c405a; // 文章标题颜色
+$font-size-title: 40rpx;
+$color-subtitle: #555555; // 二级标题颜色
+$font-size-subtitle: 36rpx;
+$color-paragraph: #3f536e; // 文章段落颜色
+$font-size-paragraph: 30rpx;

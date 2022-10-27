@@ -1,0 +1,36 @@
+{
+  "name": "@vant/icons",
+  "version": "1.8.0",
+  "description": "vant icons",
+  "main": "./src/config.js",
+  "types": "./src/config.d.ts",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "release": "release-it"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/youzan/vant.git",
+    "directory": "packages/vant-icons"
+  },
+  "bugs": "https://github.com/youzan/vant/issues",
+  "author": "chenjiahan",
+  "license": "MIT",
+  "devDependencies": {
+    "release-it": "^14.11.6"
+  },
+  "release-it": {
+    "git": {
+      "tag": false,
+      "commitMessage": "release: @vant/icons ${version}",
+      "addUntrackedFiles": true,
+      "requireCleanWorkingDir": false
+    }
+  }
+}

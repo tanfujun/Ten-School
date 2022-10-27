@@ -1,0 +1,68 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/user/user",
+    "pages/order/order",
+    "pages/purchase/purchase",
+    "pages/user/address/address",
+    "pages/user/add/add",
+    "pages/user/voucher/voucher",
+    "pages/user/voucher_detail/voucher_detail",
+    "pages/user/coupon/coupon",
+    "pages/order/addOrder/addOrder",
+    "pages/order/remark/remark",
+    "pages/purchase/selectCoupon/selectCoupon",
+    "pages/user/advice/advice",
+    "pages/order/order_detail/order_detail",
+    "pages/user/code/code",
+    "pages/user/call/call",
+    "pages/user/wallet/wallet"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "selectedColor": "#1296db",
+    "color": "#2e2e2e",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "iconPath": "static/tabbar/首页.png",
+        "selectedIconPath": "static/tabbar/首页 _selected.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/purchase/purchase",
+        "iconPath": "static/tabbar/奶茶.png",
+        "selectedIconPath": "static/tabbar/奶茶 _selected.png",
+        "text": "点餐"
+      },
+      {
+        "pagePath": "pages/order/order",
+        "iconPath": "static/tabbar/订单.png",
+        "selectedIconPath": "static/tabbar/订单 _selected.png",
+        "text": "订单"
+      },
+      {
+        "pagePath": "pages/user/user",
+        "iconPath": "static/tabbar/我的.png",
+        "selectedIconPath": "static/tabbar/我的 _selected.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+    "van-tabs": "/wxcomponents/dist/tabs/index",
+    "van-tab": "/wxcomponents/dist/tab/index",
+    "van-empty": "/wxcomponents/dist/empty/index",
+    "van-image": "/wxcomponents/dist/image/index",
+    "van-cell": "/wxcomponents/dist/cell/index",
+    "van-field": "/wxcomponents/dist/field/index",
+    "van-swipe-cell": "/wxcomponents/dist/swipe-cell/index",
+    "button": "/components/Button"
+  }
+}

@@ -1,0 +1,51 @@
+{
+	"bsonType": "object",
+	"required": ["user_id", "user_name", "user_avatar"],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"user_id": {
+			"bsonType": "string",
+			"description": "用户openid",
+			"title": "openid",
+			"trim": "both"
+		},
+		"user_name": {
+			"bsonType": "string",
+			"description": "用户姓名",
+			"title": "name",
+			"trim": "both"
+		},
+		"user_avatar": {
+			"bsonType": "string",
+			"description": "用户头像地址",
+			"title": "avatar",
+			"trim": "both"
+		},
+		"user_credit": {
+			"bsonType": "int",
+			"description": "用户积分",
+			"title": "credit",
+			"trim": "both",
+			"defaultValue": 0
+		},
+		"user_wallet": {
+			"bsonType": "int",
+			"description": "用户钱包",
+			"title": "wallet",
+			"trim": "both",
+			"defaultValue": 0
+		},
+		"user_coupon": {
+			"bsonType": "int",
+			"description": "用户优惠券数量",
+			"title": "coupon",
+			"trim": "both",
+			"defaultValue": 0
+		}
+	}
+}

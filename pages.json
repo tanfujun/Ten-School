@@ -1,0 +1,201 @@
+{
+    "pages" : [
+        {
+            "path" : "pages/home/index",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "navigationStyle" : "custom"
+            }
+        },
+        {
+            "path" : "pages/user/user",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false,
+				"navigationStyle" : "custom"
+            }
+        },
+        {
+            "path" : "pages/order/order",
+            "style" : {
+                "navigationBarTitleText" : "订单",
+                "enablePullDownRefresh" : false
+            }
+        },
+        {
+            "path" : "pages/purchase/purchase",
+            "style" : {
+                "navigationBarTitleText" : "",
+                "enablePullDownRefresh" : false,
+                "usingComponents" : {
+                    "van-row" : "/wxcomponents/dist/row/index",
+                    "van-col" : "/wxcomponents/dist/col/index"
+                }
+            }
+        }
+
+        ,{
+            "path" : "pages/user/address/address",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "地址列表",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/add/add",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/voucher/voucher",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "积分商城",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/voucher_detail/voucher_detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "优惠券详情",
+                "enablePullDownRefresh": false
+            }
+            
+        },
+		{
+		    "path" : "pages/user/coupon/coupon",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "我的喜茶券",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+        ,{
+            "path" : "pages/order/addOrder/addOrder",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单结算",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/order/remark/remark",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "填写备注",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/purchase/selectCoupon/selectCoupon",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/advice/advice",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "反馈意见",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/order/order_detail/order_detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "订单详情",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/code/code",
+            "style" :                                                                                    
+            {
+				"navigationStyle" : "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/call/call",
+            "style" :                                                                                    
+            {
+                "navigationStyle" : "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/wallet/wallet",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "我的钱包",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
+    "globalStyle" : {
+        "navigationBarTextStyle" : "black",
+        "navigationBarTitleText" : "uni-app",
+        "navigationBarBackgroundColor" : "#F8F8F8",
+        "backgroundColor" : "#F8F8F8",
+        "usingComponents" : {
+            "van-tabs" : "/wxcomponents/dist/tabs/index",
+            "van-tab" : "/wxcomponents/dist/tab/index",
+            "van-empty" : "/wxcomponents/dist/empty/index",
+			"van-image": "/wxcomponents/dist/image/index",
+			"van-cell": "/wxcomponents/dist/cell/index",
+			"van-field": "/wxcomponents/dist/field/index",
+			"van-swipe-cell": "/wxcomponents/dist/swipe-cell/index"
+        }, 
+        "app-plus" : {
+            "titleNView" : false
+        }
+    },
+    "tabBar" : {
+        "selectedColor" : "#1296db",
+        "color" : "#2e2e2e",
+        "list" : [
+            {
+                "pagePath" : "pages/home/index",
+                "iconPath" : "static/tabbar/首页.png",
+                "selectedIconPath" : "static/tabbar/首页 _selected.png",
+                "text" : "首页"
+            },
+            {
+                "pagePath" : "pages/purchase/purchase",
+                "iconPath" : "static/tabbar/奶茶.png",
+                "selectedIconPath" : "static/tabbar/奶茶 _selected.png",
+                "text" : "点餐"
+            },
+            {
+                "pagePath" : "pages/order/order",
+                "iconPath" : "static/tabbar/订单.png",
+                "selectedIconPath" : "static/tabbar/订单 _selected.png",
+                "text" : "订单"
+            },
+            {
+                "pagePath" : "pages/user/user",
+                "iconPath" : "static/tabbar/我的.png",
+                "selectedIconPath" : "static/tabbar/我的 _selected.png",
+                "text" : "我的"
+            }
+        ]
+    }
+}

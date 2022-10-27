@@ -1,0 +1,33 @@
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": false,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"code": {
+			"description": "订单号"
+		},
+		"user_id": {
+			"description": "用户id"
+		},
+		"amount": {
+			"description": "订单总价格"
+		},
+		"remark": {
+			"description": "备注"
+		},
+		"voucher_id": {
+			"description": "购物券id"
+		},
+		"create_time": {
+			"description": "创建时间"
+		}
+	}
+}

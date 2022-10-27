@@ -1,0 +1,7 @@
+{
+  "name": "voucher",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

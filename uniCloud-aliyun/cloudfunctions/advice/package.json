@@ -1,0 +1,7 @@
+{
+  "name": "advice",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

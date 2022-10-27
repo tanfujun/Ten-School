@@ -1,0 +1,1 @@
+<view class="button data-v-24e9ca3b"><slot></slot><text class="data-v-24e9ca3b">{{text}}</text></view>

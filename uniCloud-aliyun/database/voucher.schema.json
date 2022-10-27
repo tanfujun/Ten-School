@@ -1,0 +1,24 @@
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": false,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"deno": {
+			"description": "购物券减免金额"
+		},
+		"start_date": {
+			"description": "开始使用时间"
+		},
+		"end_date": {
+			"description": "截止使用时间"
+		}
+	}
+}

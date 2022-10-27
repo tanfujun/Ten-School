@@ -1,0 +1,104 @@
+{
+  "name": "vant",
+  "version": "2.12.50",
+  "description": "Mobile UI Components built on Vue",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "style": "lib/index.css",
+  "typings": "types/index.d.ts",
+  "files": [
+    "es",
+    "lib",
+    "types",
+    "vetur"
+  ],
+  "npm": {
+    "tag": "latest-v2"
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "scripts": {
+    "bootstrap": "yarn || npm i",
+    "dev": "vant-cli dev",
+    "lint": "vant-cli lint",
+    "test": "vant-cli test",
+    "build": "vant-cli build",
+    "release": "vant-cli release --tag latest-v2",
+    "test:watch": "vant-cli test --watch",
+    "release:site": "sh docs/site/release.sh",
+    "test:coverage": "open test/coverage/index.html"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "vant-cli commit-lint"
+    }
+  },
+  "lint-staged": {
+    "*.md": "prettier --write",
+    "*.{ts,tsx,js,vue,less}": "prettier --write",
+    "*.{ts,tsx,js,vue}": "eslint --fix",
+    "*.{vue,css,less}": "stylelint --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:vant-ui/vant.git"
+  },
+  "keywords": [
+    "ui",
+    "vue",
+    "frontend",
+    "mobile ui",
+    "component",
+    "components"
+  ],
+  "author": "youzanfe",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "7.x",
+    "@vant/icons": "^1.7.1",
+    "@vant/popperjs": "^1.1.0",
+    "@vue/babel-helper-vue-jsx-merge-props": "^1.0.0",
+    "vue-lazyload": "1.2.3"
+  },
+  "peerDependencies": {
+    "vue": ">= 2.6.0"
+  },
+  "devDependencies": {
+    "@vant/cli": "^2.11.11",
+    "prettier": "2.1.0",
+    "vue": "^2.6.12",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "sideEffects": [
+    "es/**/style/*",
+    "lib/**/style/*",
+    "*.css",
+    "*.less"
+  ],
+  "vetur": {
+    "tags": "vetur/tags.json",
+    "attributes": "vetur/attributes.json"
+  },
+  "web-types": "vetur/web-types.json",
+  "eslintConfig": {
+    "root": true,
+    "extends": [
+      "@vant"
+    ]
+  },
+  "stylelint": {
+    "extends": [
+      "@vant/stylelint-config"
+    ]
+  },
+  "prettier": {
+    "singleQuote": true,
+    "proseWrap": "never"
+  },
+  "browserslist": [
+    "Android >= 4.0",
+    "iOS >= 8"
+  ]
+}

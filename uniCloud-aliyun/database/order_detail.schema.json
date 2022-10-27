@@ -1,0 +1,30 @@
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": false,
+		"create": false,
+		"update": false,
+		"delete": false
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"order_id": {
+			"description": "订单ID号"
+		},
+		"good_id": {
+			"description": "商品ID号"
+		},
+		"price": {
+			"description": "商品原价"
+		},
+		"actual_price": {
+			"description": "购买商品的实际价格"
+		},
+		"num": {
+			"description": "购买商品的数量"
+		}
+	}
+}

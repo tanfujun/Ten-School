@@ -1,0 +1,7 @@
+{
+	"method": "getOpenid",
+	"params": [
+		"123",
+		"132"
+	]
+}
