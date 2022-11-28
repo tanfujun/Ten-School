@@ -210,6 +210,7 @@
 </template>
 
 <script>
+	import lodash from 'lodash'
 	import {mapState} from 'vuex'
 	const goods = uniCloud.importObject('goods')
 	export default {
@@ -345,17 +346,22 @@
 			},
 			search(value){
 				console.log(value);
-				this.searchList = []
-				this.CategoryList.forEach(item =>{
-					item.product.forEach(item => {
-						let str = new RegExp(value);
-						let result = str.test(item.name)
-						if(result){
-							this.searchList.push(item)
-						}
-					})
-				})
-				// console.log(this.searchList);
+				// let that = this
+				if(value){
+					let func = lodash.debounce(()=>{
+						this.searchList = []
+						this.CategoryList.forEach(item =>{
+							item.product.forEach(item => {
+								let str = new RegExp(value);
+								let result = str.test(item.name)
+								if(result){
+									this.searchList.push(item)
+								}
+							})
+						})
+					},1000)
+					func()
+				}
 			},
 			
 			activeTap(id) {

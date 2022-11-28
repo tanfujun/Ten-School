@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "dayjs": "^1.11.6",
+    "lodash": "^4.17.21",
     "vant": "^2.12.50"
   }
 }
