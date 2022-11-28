@@ -8,6 +8,8 @@ Uniapp + UniCloud + uni-ui 奶茶点餐小程序项目
 
 <image src="https://user-images.githubusercontent.com/97941836/204225690-f558c450-3c68-461f-8024-debe44707118.png" style="width:200px;height:auto" ></image>
 
+update readme.md
+
 2.优惠券模块
 3.用户地址模块
 4.点餐模块
