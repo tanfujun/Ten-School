@@ -6,7 +6,8 @@ Uniapp + UniCloud + uni-ui 奶茶点餐小程序项目
 
 1.登录模块
 
-<image src='www.123.com'></image>
+![381618843548011572](https://user-images.githubusercontent.com/97941836/204225690-f558c450-3c68-461f-8024-debe44707118.png)
+
 
 2.优惠券模块
 3.用户地址模块
