@@ -8,7 +8,7 @@
 					<view class="address">
 						<text class="right"><text class="default" v-if="address.isdefault==1">默认</text>{{address.address}}</text>
 						</view>
-						<view class="update-address" @tap="updateAddress(address._id)">
+						<view class="update-address" @click.stop="updateAddress(address._id)">
 							<image src="../../../static/address/修改.png" mode=""></image>
 						</view>
 				</view>
