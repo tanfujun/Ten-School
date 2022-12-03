@@ -10,9 +10,9 @@ Uniapp + UniCloud + uni-ui 奶茶点餐小程序项目
 
 1.登录模块
 
-<image src="assets/1.png" style="width:200px;height:auto" ></image>
-
-update readme.md
+<image src="assets/home/nologin.png" style="width:200px;height:auto" ></image>
+<image src="assets/home/getuser.png" style="width:200px;height:auto" ></image>
+<image src="assets/home/home.png" style="width:200px;height:auto" ></image>
 
 2.优惠券模块
 3.用户地址模块
