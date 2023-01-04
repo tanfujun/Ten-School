@@ -1,4 +1,4 @@
-### lantan-Tea
+### 十口校园
 
 Uniapp + UniCloud + uview-ui 校园服务型平台
 
