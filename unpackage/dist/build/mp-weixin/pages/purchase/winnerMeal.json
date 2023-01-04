@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty",
+    "u--image": "/uni_modules/uview-ui/components/u--image/u--image",
+    "u--text": "/uni_modules/uview-ui/components/u--text/u--text",
+    "u-rate": "/uni_modules/uview-ui/components/u-rate/u-rate"
+  }
+}

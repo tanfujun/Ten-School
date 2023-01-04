@@ -8,14 +8,15 @@
 		<view class="context">
 			<view class="avatar">
 				<view class="left">
-					<view class="introduce" v-if="name">
-						<text >你好，{{name}}</text>
-						<text class="welcome">欢迎来到老谭的奶茶屋，优惠多多！</text>
+					<view class="introduce" v-if="isLogin">
+						<text >你好，{{name?name:"wechatUser"}}</text>
+						<text class="welcome">欢迎来到校园综合性服务平台，优惠多多！</text>
 					</view>
 					<text v-else @tap="login">点我一键登录！</text>
 				</view>
 				<view class="right">
 					<van-image round width="140rpx" height="140rpx"
+						@tap="gotoSet"
 						:src="avatar?avatar:'https://wx.qlogo.cn/mmopen/vi_32/Hx7MFkCEmZVHziaTTiaHSiaCs4ApnH5CD0nYOhOg1nYUUMYtxMXkL6L4VL5icRfO5w4LGzW5ib0FZicwj2MficyYfZgCw/132'" />
 				</view>
 			</view>
@@ -23,13 +24,13 @@
 			<view class="row">
 				<view class="grid" open-type="navigate" @tap="gotoVoucher">
 					<image src="/static/my/me_icon_points.png"></image>
-					<view class="value">{{credit?credit:0}}</view>
-					<view class="title">积分</view>
+					<!-- <view class="value">{{user_pay?user_pay:0}}</view> -->
+					<view class="title">个人消费</view>
 				</view>
 				<view class="grid" open-type="navigate" @tap="gotoCoupon">
 					<image src="/static/my/me_icon_quan.png"></image>
-					<view class="value">{{coupon?coupon:0}}</view>
-					<view class="title">喜茶劵</view>
+					<!-- <view class="value">{{coupon?coupon:0}}</view> -->
+					<view class="title">代金券</view>
 				</view>
 <!-- 				<view class="grid" open-type="navigate" @tap="gotoWallet">
 					<image src="/static/my/me_icon_wallet.png"></image>
@@ -54,10 +55,11 @@
 			</view>
 
 			<view class="setting">
+				<van-cell @tap="gotoOrder" title="我的订单" is-link />
 				<van-cell @tap="gotoCode" title="会员码" is-link />
 				<van-cell @tap="gotoCall" title="联系客服" is-link />
 				<van-cell @tap="gotoAdvice" title="反馈意见" is-link />
-				<van-cell @tap="logout" title="退出登录" style="margin-bottom: 200rpx;" is-link />
+				<van-cell @tap="logout" v-if="isLogin" title="退出登录" style="margin-bottom: 200rpx;" is-link />
 			</view>
 			<view style="height: 50rpx;">
 				
@@ -70,6 +72,7 @@
 	import {
 		mapState
 	} from 'vuex'
+	const special_tool = uniCloud.importObject('special_tool')
 	export default {
 		data() {
 			return {
@@ -89,16 +92,19 @@
 						coverPic: "https://go.cdn.heytea.com/storage/products/2020/05/08/0a11147144ff42629e6eca9eeec53215.png",
 					}
 		],
-		userinfo:{}
+		userinfo:{},
+		user_pay:''
 			}
 		},
 		computed: {
 			...mapState({
 				name: state => state.user.userinfo.user_name,
+				isLogin: state => state.user.isLogin,
 				avatar: state => state.user.userinfo.user_avatar,
 				credit: state => state.user.userinfo.user_credit,
 				wallet: state => state.user.userinfo.user_wallet,
 				coupon: state => state.user.userinfo.user_coupon,
+				user_id:state => state.user.openid
 				
 			})
 		},
@@ -110,10 +116,31 @@
 			if(!uni.getStorageSync('openid')){
 				this.logout()
 			}
+			// if(uni.getStorageSync('openid')){
+			// 	this.$store.dispatch('getUserInfo')
+			// }
 		},
 		methods: {
 			login() {
-				this.$store.dispatch('getUserProfile')
+				this.$store.dispatch('login',true)
+				
+				console.log(this.isLogin);
+			},
+			async getUserPay(){
+				let res = await special_tool.userTodayPay(this.user_id)
+				this.user_pay = res.data.totalPay
+				console.log(this.user_pay);
+			},
+			gotoOrder(){
+				
+				uni.navigateTo({
+					url:'/pages/order/order'
+				},true)
+			},
+			gotoSet(){
+				uni.navigateTo({
+					url:'/pages/user/set_userinfo/set_userinfo'
+				},true)
 			},
 			async getUserInfo(){
 				let openid = uni.getStorageSync('openid')
@@ -125,6 +152,7 @@
 			},
 			logout(){
 				this.$store.dispatch('logout')
+				
 			},
 			gotoAdvice(){
 				uni.navigateTo({
@@ -143,7 +171,7 @@
 			},
 			gotoVoucher(){
 				uni.navigateTo({
-					url:'/pages/user/voucher/voucher'
+					url:'/pages/user/userTodayPay/userTodayPay'
 				},true)
 			},
 			gotoCoupon(){

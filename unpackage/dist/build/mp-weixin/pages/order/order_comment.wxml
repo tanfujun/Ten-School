@@ -1,0 +1,1 @@
+<view class="container"><u--textarea bind:input="__e" vue-id="1638d582-1" placeholder="请输入评价内容" count="{{true}}" value="{{comment}}" data-event-opts="{{[['^input',[['__set_model',['','comment','$event',[]]]]]]}}" bind:__l="__l"></u--textarea></view>

@@ -2,34 +2,35 @@
 	<view class="container">
 		<view class="header">
 			<image src="../../../static/order/商店.png" mode="heightFix"></image>
-			<text class="center">订单已完成</text>
+			<text class="center">{{detail.num?`取餐号：${detail.num}`:'订单配送完成'}}</text>
 			<text class="bottom">感谢您的支持，欢迎再次光临</text>
 		</view>
 		<scroll-view class="scroll" scroll-y="true" >
 			<view class="context">
-				<view class="goodinfo" v-for="good in detail.goodsInfo">
+				<view class="goodinfo" v-for="good in detail.code.order_detail">
 					<view class="left">
-						<text>{{good.Detail[0].name}}</text>
-						<text style="font-size: 22rpx;color: #999;height: 60rpx;overflow: hidden;margin-top: 10rpx;display: -webkit-box;-webkit-box-orient: vertical;text-overflow: ellipsis;-webkit-line-clamp: 2;">{{good.Detail[0].description}}</text>
+						<text>{{good.meal_info.meal_name}}</text>
+						<text style="font-size: 22rpx;color: #999;overflow: hidden;margin-top: 10rpx;display: -webkit-box;-webkit-box-orient: vertical;text-overflow: ellipsis;-webkit-line-clamp: 2;">{{good.meal_info.meal_desc}}</text>
 					</view>
 					<view class="right">
 						<text style="margin-right: 20rpx;">X{{good.num}}</text>
-						<text>￥{{good.Detail[0].price}}</text>
+						<text>￥{{good.meal_price}}</text>
 					</view>
 				</view>
 				<view class="goodTotal">
 					<text>商品折后总价</text>
-					<text>￥{{detail.amount}}</text>
+					<text>￥{{detail.actual_price}}</text>
 				</view>
 				<view class="total">
 					<text>合计</text>
-					<text>￥{{detail.amount}}</text>
+					<text>￥{{detail.actual_price}}</text>
 				</view>
 				<view class="remark">
 					<text>如需退款，请联系门店</text>
-					<text>下单时间：{{detail.create_time}}</text>
-					<text>取茶号：8884</text>
-					<text>订单编号：{{detail.code}}</text>
+					<text>下单时间：{{getTime(detail.addtime)}}</text>
+					<text v-if="!detail.num">地址：{{detail.address}}</text>
+					<text>电话：{{detail.phone}}</text>
+					<text>订单编号：{{detail.code._value}}</text>
 					<text>备注信息：{{detail.remark}}</text>
 				</view>
 			</view>
@@ -39,6 +40,7 @@
 </template>
 
 <script>
+	import dayjs from 'dayjs'
 	const orderCloud = uniCloud.importObject('order')
 	export default {
 		data() {
@@ -47,14 +49,16 @@
 			}
 		},
 		methods: {
+			getTime(time){
+				return dayjs(time).format("YYYY-MM-DD HH:mm")
+			},
 			async getOrderDetail(code){
 				let user_id = uni.getStorageSync('openid')
-				let orderInfo = await orderCloud.getUserOrder(user_id)
-				let index = orderInfo.findIndex(item => item.code === code)
-				if(index != -1){
-					this.detail = orderInfo[index]
+				let result = await orderCloud.getOrderInfo(code)
+				console.log(result.data);
+				if(result.code == 200){
+					this.detail = result.data[0]
 				}
-				console.log(this.detail);
 			}
 		},
 		onLoad(query) {
@@ -106,23 +110,28 @@
 				flex-direction: column;
 				box-shadow: $box-shadow;
 				padding: 0 40rpx;
-				margin-top: 20rpx;
+				margin-top: 10rpx;
 				// height: 800rpx;
 				color: $text-color-base;
 				.goodinfo{
 					display: flex;
 					margin-top: 60rpx;
 					height: 80rpx;
+					width: 100%;
 					align-items: center;
 					.left{
 						font-size: 27rpx;
 						display: flex;
 						flex-direction: column;
-						flex: 1;
+						width: 600rpx;
+						// flex: 1;
 						padding-right: 20rpx;
 					}
 					.right{
 						font-size: 28rpx;
+						flex: 1;
+						display: flex;
+						justify-content: flex-start;
 						font-weight: bold;
 					}
 				}

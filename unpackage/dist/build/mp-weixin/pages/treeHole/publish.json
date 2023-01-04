@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "发布树洞",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u--textarea": "/uni_modules/uview-ui/components/u--textarea/u--textarea",
+    "u-upload": "/uni_modules/uview-ui/components/u-upload/u-upload",
+    "u-switch": "/uni_modules/uview-ui/components/u-switch/u-switch",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
+    "u-notify": "/uni_modules/uview-ui/components/u-notify/u-notify"
+  }
+}

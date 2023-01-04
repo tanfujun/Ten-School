@@ -82,9 +82,15 @@
 			},
 			choose(address){
 				this.$store.commit('SET_ADDRESS',address)
-				uni.switchTab({
-					url:'/pages/purchase/purchase'
-				})
+				// uni.navigateTo({
+				// 	url:'/pages/purchase/purchase'
+				// })
+				let pages = getCurrentPages()
+				let prevPages = pages[pages.length -2]
+				prevPages.$vm.phone = address.phone
+				prevPages.$vm.address = address.address
+				// prevPages.$vm.voucher_user_id = voucher_user_id
+				uni.navigateBack()
 			}
 		},
 		onLoad() {

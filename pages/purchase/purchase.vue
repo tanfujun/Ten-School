@@ -9,33 +9,56 @@
 			</view>
 		</view>
 		<!-- 定位 -->
+		<shopShow></shopShow>
 		<view class="position">
 			<view class="left">
-				<view class="shop_name">
+				<view style="height: 80rpx;display: flex;align-items: center;">
+					<u-tabs
+					    :list="list1"
+						@click="changePage"
+					    lineWidth="20"
+					    lineHeight="7"
+						:current="current_index"
+					    :lineColor="`url(${lineBg}) 100% 100%`"
+					    :activeStyle="{
+					        color: '#303133',
+					        fontWeight: 'bold',
+					        transform: 'scale(1.05)'
+					    }"
+					    :inactiveStyle="{
+					        color: '#606266',
+					        transform: 'scale(1)',
+					    }"
+					    itemStyle="padding-left: 15px; padding-right: 15px; height: 34px;"
+					    >
+					    </u-tabs>
+				</view>
+<!-- 				<view class="shop_name">
 					<image src="../../static/common/star_normal.png" class="icon" mode=""></image>
 					<text style="overflow: hidden;text-overflow: ellipsis;">{{takein?'广州航海学院店':address.address}}</text>
 					<image src="../../static/common/black_arrow_right.png" style="width: 40rpx;height: 40rpx;margin-left: 5rpx;margin-top: 4rpx;" mode=""></image>
 				</view>
-				<text class="meter">距我666m</text>
+				<text class="meter">距我666m</text> -->
 			</view>
 			<view class="right">
 				<view :class="takein?'active':'ziqu'" @tap="updateTakein(true)">
-					<text>自取</text>
+					<text>取号</text>
 				</view>
-				<view :class="takein?'waimai':'active'" @tap="gotoAddress">
+				<view :class="takein?'waimai':'active'" @tap="updateTakein(false)">
 					<text>外卖</text>
 				</view>
 			</view>
 		</view> 
-
+		<u-line color="#eee"></u-line>
 		<!-- 提示 -->
 		<view class="tip"></view>
 
 		<!-- 主体内容 -->
-		<view class="context">
-			<van-row>
+		<comment v-show="!show_goods" ></comment>
+		<view class="context" v-show="show_goods">
+	
 				<!-- 左侧tabbar栏 -->
-				<van-col span="6">
+<!-- 				<van-col span="6">
 					<scroll-view class="left" scroll-y="true" scroll-with-animation>
 						<view :class="(active === item._id ?'active' : '')" @click="activeTap(item._id)"
 							v-for="item in CategoryList" :key="item._id"> 
@@ -43,24 +66,23 @@
 							<text>{{item.name}}</text>
 						</view>
 					</scroll-view>
-				</van-col>
+				</van-col> -->
 				<!-- 右侧商品 -->
-				<van-col span="18">
-					<scroll-view class="right" scroll-y="true" scroll-with-animation :scroll-top="scrollTop"
+		<scroll-view class="right" scroll-y="true" scroll-with-animation :scroll-top="scrollTop"
 						@scroll="handlescroll">
 						<view class="scroll-right" v-for="item in CategoryList" :key="item._id">
-							<text class="categoryName">{{item.name}}</text>
-							<view v-for="good in item.product" class="product" >
-								<image :src="good.images" mode="" @tap="openPopup(good._id)"></image>
+							<!-- <text class="categoryName">{{item.meal_name}}</text> -->
+							<view class="product" >
+								<image :src="item.meal_img" mode="" @tap="openPopup(item._id)"></image>
 								<view class="product-right">
-									<text class="good-name" @tap="openPopup(good._id)">{{good.name}}</text>
-									<view class="description" @tap="openPopup(good._id)">{{good.description}}</view>
+									<text class="good-name" @tap="openPopup(item._id)">{{item.meal_name}}</text>
+									<view class="description" @tap="openPopup(item._id)">{{item.meal_desc}}</view>
 									<view class="bottom">
-										<text class="price">{{good.price}}</text>
+										<text class="price">￥{{item.meal_price}}</text>
 										<view class="add">
-											<image v-show="good.num>0" @tap="subtract(good._id)" class="icon" style="margin-right: 10rpx;" src="../../static/purcase/subtract.png" mode=""></image>
-											<text v-show="good.num>0">{{good.num}}</text>
-											<image class="icon" style="margin-left: 10rpx;" @tap="add(good._id)" src="../../static/purcase/add.png" mode=""></image>
+											<image v-show="item.num>0" @tap="subtract(item._id)" class="icon" style="margin-right: 10rpx;" src="../../static/purcase/subtract.png" mode=""></image>
+											<text v-show="item.num>0">{{item.num}}</text>
+											<image class="icon" style="margin-left: 10rpx;" @tap="add(item._id)" src="../../static/purcase/add.png" mode=""></image>
 										</view>
 									</view>
 								</view>
@@ -70,8 +92,8 @@
 							
 						</view>
 					</scroll-view>
-				</van-col>
-			</van-row>
+
+
 
 		</view>
 
@@ -103,18 +125,18 @@
 					</view>
 					<scroll-view style="max-height: 670rpx;"  scroll-y="true" scroll-with-animation>
 					<view class="detail" v-for="good in cart">
-						<image :src="good.images" mode=""></image>
+						<image :src="good.meal_img" mode=""></image>
 						<view class="right">
 							<view class="title">
-								<text>{{good.name}}</text>
+								<text>{{good.meal_name}}</text>
 							</view>
 							<view class="label">
 								
 							</view>
 							<view class="price">
-								<text>￥{{good.price}}</text>
+								<text>￥{{good.meal_price}}</text>
 								<view class="add">
-									<image v-show="good.num>0" @tap="subtract(good._id)" class="icon" style="margin-right: 10rpx;" src="../../static/purcase/subtract.png" mode=""></image>
+										<image v-show="good.num>0" @tap="subtract(good._id)" class="icon" style="margin-right: 10rpx;" src="../../static/purcase/subtract.png" mode=""></image>
 									<text v-show="good.num>0">{{good.num}}</text>
 									<image class="icon" style="margin-left: 10rpx;" @tap="add(good._id)" src="../../static/purcase/add.png" mode=""></image>
 								</view>
@@ -129,7 +151,7 @@
 		<!-- 抽屉，搜索商品内容 -->
 		<uni-drawer ref="showRight" mode="left" :mask-click="false">
 			<view class="search-container">
-				<uni-search-bar clearButton="always" cancelButton="always" placeholder="搜个莓看一看" @input="search"  :focus="isfocus" v-model="searchValue"
+				<uni-search-bar clearButton="always" cancelButton="always" placeholder="请输入搜索商品名称" @input="search"  :focus="isfocus" v-model="searchValue"
 								@cancel="cancel" >
 				</uni-search-bar>
 				
@@ -137,21 +159,21 @@
 					<scroll-view scroll-y="true" >
 						<view class="milk" v-for="item in searchList" @tap="openPopup(item._id)">
 							<view class="left">
-								<image :src="item.images" mode="widthFix"></image>
-								<text>{{item.name}}</text>
+								<image :src="item.meal_img"></image>
+								<text>{{item.meal_name}}</text>
 							</view>
 							<view class="right">
-								<text>￥{{item.price}}</text>
+								<text>￥{{item.meal_price}}</text>
 							</view>
 						</view>
 					</scroll-view>
 				</view>
 				
-				<view class="context" v-else >
+<!-- 				<view class="context" v-else >
 					<view class="history">
 						<text class="title">历史搜索</text>
 						<view class="label-container">
-							<text class="label" v-for="label in historySearch" @tap="openPopup(label._id)">
+						<text class="label" v-for="label in historySearch" @tap="openPopup(label._id)">
 								{{label.name}}
 							</text>
 						</view>
@@ -159,13 +181,13 @@
 					<view class="hot">
 						<text class="title">热门搜索</text>
 						<view class="label-container">
-							<text class="label" v-for="label in hotSearch" @tap="openPopup(label._id)">
+						<text class="label" v-for="label in hotSearch" @tap="openPopup(label._id)">
 								{{label.name}}
 							</text>
 						</view>
 					</view>
 					
-				</view>
+				</view> -->
 			</view>
 		</uni-drawer>
 		
@@ -173,24 +195,24 @@
 		<uni-popup ref="popup" background-color="#fff" >
 			<view class="good_detail">
 				<view class="image_container">
-					<image :src="milk_detail.images" mode=""></image>
+					<image :src="milk_detail.meal_img" mode=""></image>
 					<image @tap="closePopup" style="height: 60rpx;width: 60rpx;" class="icon" src="../../static/purcase/304错误、关闭、取消-圆框.png" mode=""></image>
 				</view>
 				
 				<view class="context">
-					<text class="milk_name">{{milk_detail.name}}</text>
+					<text class="milk_name">{{milk_detail.meal_name}}</text>
 					<view class="label_container">
 						
 					</view>
 					<text class="title">产品描述</text>
-					<text class="description">{{milk_detail.description}}</text>
+					<text class="description">{{milk_detail.meal_desc}}</text>
 				</view>
 				<view style="border-bottom: 0.5rpx solid #e5e5e5;margin-top: 60rpx;" class="">
 					
 				</view>
 				<view class="bottom">
 					<view class="price">
-						<text>￥{{milk_detail.price}}</text>
+						<text>￥{{milk_detail.meal_price}}</text>
 						<view class="add">
 							<image v-show="milk_detail.num>0" @tap="subtract(milk_detail._id)" class="icon" style="margin-right: 10rpx;" src="../../static/purcase/subtract.png" mode=""></image>
 							<text v-show="milk_detail.num>0">{{milk_detail.num}}</text>
@@ -210,19 +232,33 @@
 </template>
 
 <script>
+	const meal = uniCloud.importObject('meal')
 	import lodash from 'lodash'
+	import shopShow from './shop_show.vue'
+	import comment from './comment.vue'
 	import {mapState} from 'vuex'
+import { getMealByShop } from '../../uniCloud-aliyun/cloudfunctions/meal/index.obj'
 	const goods = uniCloud.importObject('goods')
 	export default {
 		data() {
 			return {
 				active: 20,
+				current_index:0,
+				show_goods:true,
 				scrollTop: 0,  //右侧商品滑动区当前的位置
 				CategoryList:[], //分类列表及对应所有商品
 				searchValue:'', //搜索内容
 				searchList:[],  //搜索商品数组
 				isfocus:true,
 				isWaimai:false,
+				lineBg:'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAOCAYAAABdC15GAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFxSURBVHgBzZNRTsJAEIb/WTW+lpiY+FZPIDew3ABP4GJ8hxsI9zBpOYHeQDwBPQI+mRiRvpLojtPdYhCorQqF/6GdbGd2vvwzBXZcNAt4oj1ANeUoAT5iqkUjbEFLHNmhD1YPEvpZ3ghkGlVDCkc94/BmHMq998I5ONiY1ZBfpKAyuOtgAc5yOEDmYEWNh32BHF91sGHZHmwW4azciN9aQwnz3SJEgOmte+R2tdLprTYoa50mvuomlLpD4Y3oQZnov6D2RzCqI93bWOHaEmAGqQUyRBlZR1WfarcD/EJ2z8DtzDGvsMCwpm8XOCfDUsVOCYhiqRxI/CTQo4UOvjzO7Pow18vfywneuUHHUUxLn55lLw5JFpZ8bEUcY8oXdOLWiHLTxvoGpLqoUmy6dBT15o/ox3znpoycAmxUsiJTbs1cmxeVKp+0zmFIS7bGWiVghC7Vwse8jFKAX9eljh4ggKLLv7uaQvG9/F59Oo2SouxPu7OTCxN/s8wAAAAASUVORK5CYII=',
+				//Tabs标签
+				list1: [{
+				          name: '商品',
+				          }, 
+						{
+				        name: '店铺评价',
+				          },],
 				totalPrice:0,//购物车总价格
 				cart:[],//购物车数据
 				//商品详细信息
@@ -256,6 +292,9 @@
 				] //热门搜索
 			}
 		},
+		components:{
+			shopShow,comment
+		},
 		watch:{
 			//监视搜索框内容，当为空时清楚搜索商品数组
 			searchValue(newVal){
@@ -268,11 +307,12 @@
 				handler(newVal,oldVal){
 					let price = 0 
 					newVal.forEach(item => {
-						price = price + item.num*item.price
+						price = price + item.num*item.meal_price
 					})
+					console.log('newCart:',newVal);
 					this.totalPrice = price.toFixed(2)
 					if(!newVal.length){
-						this.CategoryList.forEach(item =>{item.product.forEach(item =>{item.num = 0})})
+						this.CategoryList = this.CategoryList.map(item =>{item.num = 0; return item})
 						this.$refs.cart.close()
 						console.log(this.CategoryList);
 					}
@@ -282,9 +322,17 @@
 			
 		},
 		computed:{
-			...mapState({address:state => state.user.address,takein:state => state.user.takein})
+			...mapState({shop_id:state=>state.order.shop_id,address:state => state.user.address,takein:state => state.order.takein,shop_meal:state=>state.order.mealInfo.meal_data._id.shop_meal})
 		},
 		methods: {
+			//切换评论页面
+			changePage(item){
+				if(item.index == 0){
+					this.show_goods = true
+				}else{
+					this.show_goods = false
+				}
+			},
 			updateTakein(type){
 				this.$store.commit('SET_TAKEIN',type)
 			},
@@ -297,7 +345,7 @@
 				let cart = JSON.stringify(this.cart)
 				uni.navigateTo({
 					url:`/pages/order/addOrder/addOrder?cart=${cart}`
-				})
+				},true)
 			},
 			DeleteCart(){
 				this.cart = []
@@ -307,20 +355,25 @@
 				this.$refs.cart.open('bottom')
 			},
 			subtract(id){
-				this.CategoryList.forEach(item =>{item.product.forEach(item =>{
-					if(item._id === id){
+				let newList = this.CategoryList.map((item) =>{
+					if(item._id == id){
 						item.num--
 						this.subtractCart(item)
-					}
-				})})
+						return item
+					}else return item
+				})
+				this.CategoryList = newList
 			},
 			add(id){
-				this.CategoryList.forEach(item =>{item.product.forEach(item =>{
-					if(item._id === id){
+				console.log(this.CategoryList,id);
+				let newList = this.CategoryList.map((item) =>{
+					if(item._id == id){
 						item.num++
 						this.addCart(item)
-					}
-				})})
+						return item
+					}else return item
+				})
+				this.CategoryList = newList
 			},
 			addCart(good){
 				let index = this.cart.findIndex(item => item._id === good._id)
@@ -328,75 +381,39 @@
 				if(index === -1){
 					this.cart.push(good)
 				}else{
-					this.cart[index] = good
+
+					 this.$set(this.cart,index,good)
 					}
 					console.log(this.cart);
 			},
 			subtractCart(good){
-				let index = this.cart.findIndex(item => item._id === good._id)
-				if(good.num === 0){
+				let index = this.cart.findIndex(item => item._id == good._id)
+				console.log(index,good.num);
+				if(good.num == 0){
 					this.cart.splice(index,1)
 				}else{
-					this.cart[index] = good
+					 this.$set(this.cart,index,good)
 				}
-				// console.log(this.cart);
+				console.log(this.cart);
 			},
 			cancel(){
 				this.$refs.showRight.close();
 			},
-			search(value){
+			async search(value){
 				console.log(value);
-				// let that = this
 				if(value){
-					let func = lodash.debounce(()=>{
-						this.searchList = []
-						this.CategoryList.forEach(item =>{
-							item.product.forEach(item => {
-								let str = new RegExp(value);
-								let result = str.test(item.name)
-								if(result){
-									this.searchList.push(item)
-								}
-							})
-						})
-					},1000)
-					func()
+					let result = await meal.searchMealInShop({
+						meal_forShop:this.shop_id,
+						name:value
+					})
+					if(result.code == 200){
+						this.searchList = result.data
+					}
 				}
+				
 			},
 			
-			activeTap(id) {
-				this.active = id
-				console.log(id);
-				let index = this.CategoryList.findIndex(item => item._id == id)
-				if(index==0){
-					this.scrollTop=-1
-					this.$nextTick(()=>{
-						this.scrollTop = this.CategoryList[index].scrollTop
-					})
-				}else{
-					this.scrollTop = this.CategoryList[index].scrollTop
-				}
-			},
-			getModeHeight() {
-				// let that = this
-				console.log(123);
-				let scroll_right = uni.createSelectorQuery().in(this).selectAll(".scroll-right")
-				scroll_right.boundingClientRect(data => {
-					this.CategoryList.forEach((item,index) => {
-						this.CategoryList[index].scrollTop = data[index].top-data[0].top
-						})
-						// console.log(this.CategoryList);
-				}).exec()
-			}, 
 			handlescroll(e) {
-				let currentScrollTop = Math.floor(e.detail.scrollTop)
-				// this.scrollTop =  currentScrollTop 
-				console.log('currentScrollTop:',currentScrollTop);
-				let tabs = this.CategoryList.filter(item => item.scrollTop <= e.detail.scrollTop).reverse()
-				if (tabs.length > 0) {
-					this.active = tabs[0]._id
-					// console.log(this.active);
-				}
 			},
 			get(){
 				this.scrollTop = 20
@@ -408,35 +425,36 @@
 			},
 			// 打开弹窗
 			async openPopup(good_id){
-				console.log(good_id);
+				let result = await meal.getMealInfo(good_id)
+				this.milk_detail = result.data[0]
+				console.log('milk_detail:',this.milk_detail);
 				this.$refs.showRight.close();
-				this.CategoryList.forEach(item =>{
-					item.product.forEach(item =>{
-					if(item._id === good_id){
-						this.milk_detail = item
-					}
-				})})
 				this.$refs.popup.open('center')
 			},
 			closePopup(good_id){
 				this.add(good_id)
 				this.$refs.popup.close()
-			}
-			
+			},
 		},
-		async onLoad() {
-			
-			let CategoryList = await goods.getCategory()
-			CategoryList.forEach(item=>{item.product.forEach(item=>{
+		created() {
+			console.log(this.shop_meal);
+		},
+		async onLoad(query) {
+			let CategoryList = this.shop_meal
+			console.log(this.shop_meal);
+			// console.log(CategoryList);
+			CategoryList.forEach(item=>{
 				item.num = 0 
-			})})
-			this.CategoryList = CategoryList
-			this.$nextTick(()=>{
-				this.getModeHeight()
 			})
-			
-			
-			
+			console.log(query);
+			if(query.show_goods=='false'){
+				this.show_goods = false
+				this.current_index = 1
+			}
+			this.CategoryList = CategoryList
+			// this.$nextTick(()=>{
+			// 	this.getModeHeight()
+			// })
 		}
 	}
 </script>
@@ -456,37 +474,38 @@
 			justify-content: space-between;
 			align-items: center;
 			margin-top: 40rpx;
-			padding: 0 40rpx;
+			padding-right: 40rpx;
 			height: 120rpx;
 			.left{
-				.shop_name{
-					display: flex;
-					align-items: center;
-					margin-top: 10rpx;
-					font-size: 32rpx;
-					font-weight: bold;
-					color: $text-color-base;
-					// max-width: 500rpx;
-					text{
-						// width: 300rpx;
-						max-width: 300rpx;
-						overflow: hidden;
-						display: -webkit-box;
-						-webkit-box-orient: vertical;
-						text-overflow: ellipsis;
-						-webkit-line-clamp: 1;
-					}
-					.icon{
-						margin-right: 10rpx;
-						width: 30rpx;
-						height: 30rpx;
-					}
-				}
-				.meter{
-					font-size: 28rpx;
-					color: $text-color-assist;
-					margin-top: 10rpx;
-				}
+				width: 200rpx;
+				// .shop_name{
+				// 	display: flex;
+				// 	align-items: center;
+				// 	margin-top: 10rpx;
+				// 	font-size: 32rpx;
+				// 	font-weight: bold;
+				// 	color: $text-color-base;
+				// 	// max-width: 500rpx;
+				// 	text{
+				// 		// width: 300rpx;
+				// 		max-width: 300rpx;
+				// 		overflow: hidden;
+				// 		display: -webkit-box;
+				// 		-webkit-box-orient: vertical;
+				// 		text-overflow: ellipsis;
+				// 		-webkit-line-clamp: 1;
+				// 	}
+				// 	.icon{
+				// 		margin-right: 10rpx;
+				// 		width: 30rpx;
+				// 		height: 30rpx;
+				// 	}
+				// }
+				// .meter{
+				// 	font-size: 28rpx;
+				// 	color: $text-color-assist;
+				// 	margin-top: 10rpx;
+				// }
 			}
 			.right{
 				display: flex;
@@ -540,6 +559,9 @@
 						align-items: center;
 						image{
 							width: 150rpx;
+							height: 150rpx;
+							border-radius: 10rpx;
+							margin-right: 10rpx;
 							// height: 125rpx;
 						}
 					}
@@ -823,7 +845,8 @@
 	.context {
 		width: 100%;
 		margin-top: 20rpx;
-
+		box-sizing: border-box;
+		padding-right: 35rpx;
 		.left {
 			height: 1178rpx;
 			background-color: #f6f6f6;
@@ -853,26 +876,40 @@
 			height: 1178rpx;
 			margin-left: 20rpx;
 			margin-top: 20rpx;
+			width: 100%;
+			
 			.scroll-right{
 				display: flex;
 				flex-direction: column;
 				.categoryName{
 					color: #8c8c8c;
 					font-size: 28rpx;
+					margin-top: 10rpx;
 					margin-bottom: 10rpx;
 				}
 					.product{
 						display: flex;
 						align-items: center;
-						margin-top: 20rpx;
-						margin-bottom: 20rpx;
+						margin-top: 10rpx;
+						background-color: #fff;
+						// margin-bottom: 10rpx;
+						border: 2rpx solid #eee;
+						border-radius: 10rpx;
+						padding: 20rpx;
+						width: 670rpx;
+						// box-sizing: border-box;
 						image{
-							width: 180rpx;
-							height: 150rpx;
+							width: 230rpx;
+							height: 200rpx;
+							border-radius: 10rpx;
+							margin-right: 20rpx;
 						}
 						.product-right{ 
 							margin-left: 10rpx;
 							display: flex;
+							flex: 1;
+							// padding-right: 50rpx;
+							box-sizing: border-box;
 							flex-direction: column;
 							.good-name{ 
 								font-size: 28rpx;
@@ -880,8 +917,8 @@
 							}
 							.description{
 								margin-top: 20rpx;
-								// height: 65rpx;
-								width: 320rpx;
+								height: 65rpx;
+								width: 100%;
 								font-size: 25rpx;
 								color: #8c8c8c;
 								overflow:hidden;
@@ -902,6 +939,8 @@
 								}
 								.add{
 									display: flex;
+									flex: 1;
+									justify-content: flex-end;
 									align-items: center;
 									.icon{
 										width: 38rpx;

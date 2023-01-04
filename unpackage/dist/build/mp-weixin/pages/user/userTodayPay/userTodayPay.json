@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "今日消费",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u-count-to": "/uni_modules/uview-ui/components/u-count-to/u-count-to"
+  }
+}

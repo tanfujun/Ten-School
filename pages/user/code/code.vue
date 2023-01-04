@@ -9,7 +9,7 @@
 				<text class="name">{{userInfo.user_name}}</text>
 			</view>
 			<view class="useWallet">
-				<text>使用钱包喜茶钱包支付(您还未开通喜茶钱包)</text>
+				<text>使用钱包支付(您还未开通钱包)</text>
 			</view>
 			
 			<view class="code">

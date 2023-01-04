@@ -18,6 +18,12 @@
 			</view>
 		</view>
 		
+		<u-empty
+			v-if="!couponList.length"
+		        mode="coupon"
+		        icon="http://cdn.uviewui.com/uview/empty/coupon.png"
+		>
+		</u-empty>
 	</view>
 </template>
 
@@ -30,11 +36,12 @@
 			}
 		},
 		methods: {
-			goBackAddOrder(voucher_user_id,voucher_id){
+			goBackAddOrder(_id,voucher_id){
 				let pages = getCurrentPages()
 				let prevPages = pages[pages.length -2]
+				prevPages.$vm.voucher_user_id =_id
 				prevPages.$vm.voucher_id = voucher_id
-				prevPages.$vm.voucher_user_id = voucher_user_id
+				console.log(_id,voucher_id);
 				uni.navigateBack()
 			}
 		},
@@ -42,6 +49,7 @@
 			let user_id = uni.getStorageSync('openid')
 			let couponList = await voucherCloud.getVoucherByUserId(user_id)
 			this.couponList = couponList
+			console.log(this.couponList);
 		}
 	}
 </script>

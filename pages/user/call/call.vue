@@ -6,7 +6,7 @@
 		<view class="context">
 			<view class="avatar">
 				<image src="https://thirdwx.qlogo.cn/mmopen/vi_32/iaxgvyIjNFomliaYdicSfSG79hLibCvuIxmbVQJaJQgTptY2FX4L2kQ41dgeA1Bqic8DnCSBaN2IOhlTAibvgADV3duw/132" mode=""></image>
-				<text class="name">谭富均</text>
+				<text class="name">谭先生</text>
 			</view>
 			<view class="useWallet">
 				<text>扫下方二维码加作者微信联系作者</text>

@@ -6,9 +6,15 @@ import App from './App'
 
 import store from '@/store/index.js'
 
-import Button from '@/components/Button.vue'
+import Button from '@/components/tan-button.vue'
 
-Vue.component('Button',Button)
+import Input from '@/components/tanInput.vue'
+
+Vue.component('tan-button',Button)
+Vue.component('tanInput',Input)
+
+import uView from '@/uni_modules/uview-ui'
+Vue.use(uView)
 
 
 Vue.config.productionTip = false
@@ -18,6 +24,7 @@ import API from '@/api/index.js'
 Vue.prototype.$API = API
 
 App.mpType = 'app'
+
 
 //路由拦截钩子，判断是否需要登录权限
 const methodToPatch = ['navigateTo', 'redirectTo', 'switchTab', 'navigateBack']
@@ -37,7 +44,7 @@ methodToPatch.map(item => {
          }
     }
 })
- 
+
 const app = new Vue({
     ...App,
 	store

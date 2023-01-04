@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "u--textarea": "/uni_modules/uview-ui/components/u--textarea/u--textarea",
+    "u-button": "/uni_modules/uview-ui/components/u-button/u-button",
+    "u--text": "/uni_modules/uview-ui/components/u--text/u--text",
+    "u-notify": "/uni_modules/uview-ui/components/u-notify/u-notify"
+  }
+}

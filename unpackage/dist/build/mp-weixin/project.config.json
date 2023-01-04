@@ -5,12 +5,16 @@
   },
   "setting": {
     "urlCheck": true,
-    "es6": true
+    "es6": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true,
+    "bigPackageSizeSupport": true
   },
   "compileType": "miniprogram",
   "libVersion": "",
   "appid": "wx30dae6d4ee747155",
-  "projectname": "老谭的奶茶屋",
+  "projectname": "校园综合服务平台",
   "condition": {
     "search": {
       "current": -1,

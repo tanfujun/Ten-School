@@ -6,9 +6,11 @@
 				<text>{{user_credit}}</text>
 			</view>
 			<view class="mx">
-				<text>积分明细</text><text>|</text><text>兑换记录</text>
+				<!-- <text>积分明细</text><text>|</text><text>兑换记录</text> -->
 			</view>
 		</view>
+		
+		
 		
 		<view class="voucher_container">
 			<view class="voucher" v-for="voucher in voucherList" :key="voucher._id" @click="gotoDetail(voucher._id)">

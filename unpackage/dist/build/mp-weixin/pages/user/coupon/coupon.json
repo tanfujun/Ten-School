@@ -1,5 +1,7 @@
 {
-  "navigationBarTitleText": "我的喜茶券",
+  "navigationBarTitleText": "我的代金券",
   "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "usingComponents": {
+    "u-empty": "/uni_modules/uview-ui/components/u-empty/u-empty"
+  }
 }

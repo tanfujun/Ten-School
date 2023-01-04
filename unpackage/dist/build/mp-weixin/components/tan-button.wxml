@@ -1,0 +1,1 @@
+<view class="button data-v-6f1c5062" style="{{'width:'+(width)+';'+('height:'+(height)+';')}}"><slot></slot><text class="data-v-6f1c5062">{{text}}</text></view>

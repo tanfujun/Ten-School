@@ -1,5 +1,7 @@
 {
   "navigationBarTitleText": "订单结算",
   "enablePullDownRefresh": false,
-  "usingComponents": {}
+  "usingComponents": {
+    "u-notify": "/uni_modules/uview-ui/components/u-notify/u-notify"
+  }
 }

@@ -2,10 +2,14 @@
   "navigationBarTitleText": "",
   "enablePullDownRefresh": false,
   "usingComponents": {
+    "u-tabs": "/uni_modules/uview-ui/components/u-tabs/u-tabs",
+    "u-line": "/uni_modules/uview-ui/components/u-line/u-line",
     "uni-popup": "/uni_modules/uni-popup/components/uni-popup/uni-popup",
     "uni-drawer": "/uni_modules/uni-drawer/components/uni-drawer/uni-drawer",
     "uni-search-bar": "/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar",
     "van-row": "/wxcomponents/dist/row/index",
-    "van-col": "/wxcomponents/dist/col/index"
+    "van-col": "/wxcomponents/dist/col/index",
+    "shop-show": "/pages/purchase/shop_show",
+    "comment": "/pages/purchase/comment"
   }
 }

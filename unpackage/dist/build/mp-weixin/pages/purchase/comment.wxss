@@ -1,0 +1,1 @@
+.u-page .comment .button{display:flex;width:100%;justify-content:flex-end;margin:20rpx 0rpx}.u-page{padding:0 30rpx}.u-page .u-demo-block{margin-top:20rpx;border-bottom:2rpx solid #eee}.u-page .u-demo-block__content{margin-bottom:10rpx}.album{display:flex;flex-direction:row;align-items:flex-start}.album__avatar{background-color:#f3f4f6}.album__content{margin-left:10px;flex:1}

@@ -17,6 +17,12 @@
 				<text style="color: #d7ab85;border: 1rpx solid #d7ab85;padding: 2rpx 6rpx;margin-right: 10rpx;">门店可用</text><text>满任意金额即可以使用，优惠多多！</text>
 			</view>
 		</view>
+		<u-empty
+			v-if="!couponList.length"
+		        mode="coupon"
+		        icon="http://cdn.uviewui.com/uview/empty/coupon.png"
+		>
+		</u-empty>
 		
 	</view>
 </template>
@@ -32,7 +38,7 @@
 		methods: {
 			gotoPurchase(){
 				uni.switchTab({
-					url:'/pages/purchase/purchase'
+					url:'/pages/purchase/shop_select'
 				})
 			}
 		},

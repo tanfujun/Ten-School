@@ -16,7 +16,13 @@
     "pages/order/order_detail/order_detail",
     "pages/user/code/code",
     "pages/user/call/call",
-    "pages/user/wallet/wallet"
+    "pages/user/wallet/wallet",
+    "pages/user/set_userinfo/set_userinfo",
+    "pages/treeHole/treeHole",
+    "pages/treeHole/publish",
+    "pages/purchase/shop_select",
+    "pages/user/userTodayPay/userTodayPay",
+    "pages/order/order_comment"
   ],
   "subPackages": [],
   "window": {
@@ -36,16 +42,10 @@
         "text": "首页"
       },
       {
-        "pagePath": "pages/purchase/purchase",
-        "iconPath": "static/tabbar/奶茶.png",
-        "selectedIconPath": "static/tabbar/奶茶 _selected.png",
+        "pagePath": "pages/purchase/shop_select",
+        "iconPath": "static/tabbar/商店.png",
+        "selectedIconPath": "static/tabbar/food-active.png",
         "text": "点餐"
-      },
-      {
-        "pagePath": "pages/order/order",
-        "iconPath": "static/tabbar/订单.png",
-        "selectedIconPath": "static/tabbar/订单 _selected.png",
-        "text": "订单"
       },
       {
         "pagePath": "pages/user/user",
@@ -63,6 +63,7 @@
     "van-cell": "/wxcomponents/dist/cell/index",
     "van-field": "/wxcomponents/dist/field/index",
     "van-swipe-cell": "/wxcomponents/dist/swipe-cell/index",
-    "button": "/components/Button"
+    "tan-button": "/components/tan-button",
+    "tan-input": "/components/tanInput"
   }
 }

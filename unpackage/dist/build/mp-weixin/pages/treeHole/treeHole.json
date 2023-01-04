@@ -1,0 +1,15 @@
+{
+  "navigationBarTitleText": "树洞",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "u--text": "/uni_modules/uview-ui/components/u--text/u--text",
+    "u-album": "/uni_modules/uview-ui/components/u-album/u-album",
+    "uni-transition": "/uni_modules/uni-transition/components/uni-transition/uni-transition",
+    "u-icon": "/uni_modules/uview-ui/components/u-icon/u-icon",
+    "u-loadmore": "/uni_modules/uview-ui/components/u-loadmore/u-loadmore",
+    "uni-popup": "/uni_modules/uni-popup/components/uni-popup/uni-popup",
+    "uni-popup-dialog": "/uni_modules/uni-popup/components/uni-popup-dialog/uni-popup-dialog",
+    "u-notify": "/uni_modules/uview-ui/components/u-notify/u-notify",
+    "u-action-sheet": "/uni_modules/uview-ui/components/u-action-sheet/u-action-sheet"
+  }
+}

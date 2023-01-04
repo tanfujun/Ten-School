@@ -12,7 +12,6 @@
 		props:['value','title','placeholder'],
 		data() {
 			return {
-
 			}
 		},
 		methods: {

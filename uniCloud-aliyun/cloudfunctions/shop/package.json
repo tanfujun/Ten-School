@@ -1,0 +1,7 @@
+{
+  "name": "shop",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

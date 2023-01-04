@@ -6,12 +6,12 @@
 				<input type="text" v-model="phone" style="margin-left: 20rpx;">
 		 	</view>
 			<view class="right">
-				<text>自动填写</text>
+				<!-- <text>自动填写</text> -->
 			</view>
 		 </view>
-		 <view class="getTime">
-		 	<text>取餐时间</text>
-			<text style="margin-top: 20rpx;font-size: 28rpx;color: #DBA871;font-weight: normal;">冰淇淋/鲜食等产品无需等待，可立即向店员领取</text>
+		 <view class="getTime" v-if="takein">
+		 	<text>取餐号：{{getCode}}</text>
+			<text style="margin-top: 20rpx;font-size: 28rpx;color: #DBA871;font-weight: normal;">支付成功后，等待叫号机呼唤即刻凭订单页面取餐</text>
 		 </view>
 		 <view class="goodList">
 		 	<view class="good">
@@ -19,7 +19,7 @@
 				<view class="List">
 					
 						<scroll-view class="left" scroll-x="true" >
-						<image v-for="good in cart" :src="good.images" mode="heightFix"></image>
+						<image v-for="good in cart" :src="good.meal_img" mode="heightFix"></image>
 						</scroll-view>
 					
 					<view class="right">
@@ -28,9 +28,18 @@
 					</view>
 				</view>
 		 	</view>
+			<view class="address" @tap="gotoAddress" v-if="!takein">
+				<view class="left">
+					<text>选择地址和电话</text>
+				</view>
+				<view class="right" >
+					<text >{{address}}</text>
+					<image src="../../../static/common/black_arrow_right.png" class="icon" mode=""></image>
+				</view>
+			</view>
 			<view class="coupon" @tap="gotoSelectCoupon">
 				<view class="left">
-					<text>喜茶券</text><text class="quan">券</text>
+					<text>代金券</text><text class="quan">券</text>
 				</view>
 				<view class="right">
 					<text v-show="deno">-￥{{deno}}</text>
@@ -46,6 +55,7 @@
 					<image src="../../../static/common/black_arrow_right.png" class="icon" mode=""></image>
 				</view>
 			</view>
+			
 			<view class="total">
 				<text>共{{totalNum}}件商品，小计<text style="font-size: 32rpx;font-weight: bold;">{{totalPrice}}</text></text>
 			</view>
@@ -67,6 +77,7 @@
 				<text>支付</text>
 			</view>
 		 </view>
+		 <u-notify ref="uNotify" message="Hi uView"></u-notify>
 	</view>
 </template>
 
@@ -74,6 +85,8 @@
 	import dayjs from 'dayjs'
 	const voucherCloud = uniCloud.importObject('voucher')
 	const orderCloud = uniCloud.importObject('order')
+	const addressCloud = uniCloud.importObject('address')
+	import {mapState} from 'vuex'
 	export default {
 		data() {
 			return {
@@ -84,20 +97,22 @@
 				voucher_user_id:'',
 				amount:'',
 				remark:'',
-				phone:''
+				phone:'',
+				address:''
 			}
 		},
 		watch:{
 			voucher_id:{
 				async handler(newVal){
 					if(newVal){
-						let result = await voucherCloud.getVoucherById(newVal)
+						let result = await voucherCloud.getVoucherById(this.voucher_id)
 						this.deno = result.deno
 					}
 				},
 			}
 		},
 		computed:{
+			...mapState({shop_id:state=>state.order.shop_id,takein:state=>state.order.takein,user_id:state=>state.user.openid}),
 			totalNum(){
 				let Num = 0;
 				this.cart.forEach(item => {
@@ -108,7 +123,7 @@
 			totalPrice(){
 				let Price = 0;
 				this.cart.forEach(item => {
-					Price = Price + item.price*item.num
+					Price = Price + item.meal_price*item.num
 				})
 				let total = Price.toFixed(2)
 				if(this.deno){
@@ -120,13 +135,45 @@
 				}
 				return total
 			},
+			 //取餐号（如果选择了取餐）
+			getCode(){
+				let code = '' + (parseInt(Math.random()*100)+100);
+				code = '1' + code.substring(1, 7); 
+				return code
+			}
 		},
 		onLoad(query) {
+			console.log(query.cart);
 			let cart = JSON.parse(query.cart)
 			this.cart = cart
 			console.log('cart:',cart);
+			
+			this.getdefaultInfo()
+			
 		},
 		methods: {
+			async getdefaultInfo(){
+				let address = await addressCloud.getUserAddress(this.user_id)
+				if(address.length >0){
+					let defaultIndex = address.findIndex((item)=>{return item.isdefault == 1})
+					if(defaultIndex != -1){
+						this.phone = address[defaultIndex].phone
+						if(!this.takein){
+							this.address = address[defaultIndex].address
+							console.log(this.address);
+						}
+					}else{
+						if(this.$store.state.user.userinfo.user_phone){
+							this.phone = this.$store.state.user.userinfo.user_phone
+						}
+					}
+				}else{
+					if(this.$store.state.user.userinfo.user_phone){
+						this.phone = this.$store.state.user.userinfo.user_phone
+					}
+				}
+				
+			},
 			gotoRemark(){
 				uni.navigateTo({
 					url:'/pages/order/remark/remark'
@@ -137,32 +184,43 @@
 					url:'/pages/purchase/selectCoupon/selectCoupon'
 				})
 			},
+			gotoAddress(){
+				uni.navigateTo({
+					url:'/pages/user/address/address'
+				})
+			},
 			async addOrder(){
 				if(this.phone){
 					let user_id = uni.getStorageSync('openid')
-					let code = dayjs().format('YYYY') + dayjs().unix()
-					let create_time = dayjs().format('YYYY-MM-DD HH:mm:ss')
+					// let code = dayjs().format('YYYY') + dayjs().unix()
+					// let create_time = dayjs().format('YYYY-MM-DD HH:mm:ss')
+					console.log(this.address);
 					let order = {
 						user_id:user_id,
-						code:code,
-						amount:this.totalPrice,
+						actual_price:this.totalPrice,
 						remark:this.remark,
 						phone:this.phone,
-						create_time
+						address:this.address,
+						
 					}
-					if(this.voucher_id){
-						order.voucher_id = this.voucher_id
+					if(this.voucher_user_id){
+						// console.log(this.voucher_id);
+						order.voucher_id = this.voucher_user_id
+						console.log('订单里有优惠券：',this.voucher_user_id);
+					}
+					if(this.takein){
+						order.num = this.getCode
 					}
 					let goodList = []
 					this.cart.forEach(item => {
-						goodList.push({order_code:code,good_id:item._id,actual_price:item.price,num:item.num})
+						goodList.push({shop_id:this.shop_id,meal_id:item._id,meal_price:item.meal_price,num:item.num})
 					})
+					order.goods_list = goodList
 					try{
-						let result = await orderCloud.createOrder(order,goodList,this.voucher_user_id)
-						if(result.status === 200){
-							uni.showToast({
-								title:'下单成功！'
-							})
+						let result = await orderCloud.createOrder(order)
+						if(result.code == 200){
+							this.$store.dispatch('getUserInfo') //更新用户信息
+							this.$refs.uNotify.primary('下单成功！')
 							setTimeout(()=>{
 								uni.navigateBack()
 							},1000)
@@ -183,7 +241,8 @@
 				
 				
 			}
-		}
+		},
+		
 	}
 </script>
 
@@ -250,6 +309,8 @@
 						white-space:nowrap;
 						image{
 							height: 100rpx;
+							margin-right: 20rpx;
+							border-radius: 10rpx;
 							// width: 125rpx;
 						}
 					}
@@ -296,11 +357,26 @@
 					text{
 						max-width: 200rpx;
 						overflow: hidden;
+						white-space: nowrap;
 						text-overflow: ellipsis;
 					}
 					
 				}
 			}
+			.address{
+				@extend .coupon;
+				.right{
+					color: $text-color-base;
+					text{
+						max-width: 400rpx;
+						overflow: hidden;
+						white-space: nowrap;
+						text-overflow: ellipsis;
+					}
+					
+				}
+			}
+			
 			.total{
 				height: 100rpx;
 				background-color: #fff;

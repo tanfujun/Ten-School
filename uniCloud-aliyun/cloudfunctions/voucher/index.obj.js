@@ -30,7 +30,7 @@ module.exports = {
 	},
 	async deleteUserVoucher(id,user_id){
 		let result = await voucher_user.where({_id:id}).remove()
-		let voucher_user_list = await voucher_user.where({user_id:'o7P6g5LGewjw8ZRewLD9ZraxPX_g'}).get()
+		let voucher_user_list = await voucher_user.where({user_id}).get()
 		let newCoupon = voucher_user_list.data.length
 		await user.where({user_id:user_id}).update({user_coupon:newCoupon})
 		return {

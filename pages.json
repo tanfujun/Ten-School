@@ -1,4 +1,7 @@
 {
+	"easycom": {
+			"^u-(.*)": "@/uni_modules/uview-ui/components/u-$1/u-$1.vue"
+		},
     "pages" : [
         {
             "path" : "pages/home/index",
@@ -74,7 +77,7 @@
 		    "path" : "pages/user/coupon/coupon",
 		    "style" :                                                                                    
 		    {
-		        "navigationBarTitleText": "我的喜茶券",
+		        "navigationBarTitleText": "我的代金券",
 		        "enablePullDownRefresh": false
 		    }
 		    
@@ -149,6 +152,61 @@
             }
             
         }
+        ,{
+            "path" : "pages/user/set_userinfo/set_userinfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "编辑资料",
+                "enablePullDownRefresh": false,
+				"backgroundColor": "#fff"
+            }
+            
+        }
+        ,{
+            "path" : "pages/treeHole/treeHole",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "树洞",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/treeHole/publish",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "发布树洞",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/purchase/shop_select",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/user/userTodayPay/userTodayPay",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "今日消费",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/order/order_comment",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商家评论",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
     "globalStyle" : {
         "navigationBarTextStyle" : "black",
@@ -179,17 +237,17 @@
                 "text" : "首页"
             },
             {
-                "pagePath" : "pages/purchase/purchase",
-                "iconPath" : "static/tabbar/奶茶.png",
-                "selectedIconPath" : "static/tabbar/奶茶 _selected.png",
+                "pagePath" : "pages/purchase/shop_select",
+                "iconPath" : "static/tabbar/商店.png",
+                "selectedIconPath" : "static/tabbar/food-active.png",
                 "text" : "点餐"
             },
-            {
-                "pagePath" : "pages/order/order",
-                "iconPath" : "static/tabbar/订单.png",
-                "selectedIconPath" : "static/tabbar/订单 _selected.png",
-                "text" : "订单"
-            },
+            // {
+            //     "pagePath" : "pages/order/order",
+            //     "iconPath" : "static/tabbar/订单.png",
+            //     "selectedIconPath" : "static/tabbar/订单 _selected.png",
+            //     "text" : "订单"
+            // },
             {
                 "pagePath" : "pages/user/user",
                 "iconPath" : "static/tabbar/我的.png",

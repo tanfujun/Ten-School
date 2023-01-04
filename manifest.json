@@ -1,5 +1,5 @@
 {
-    "name" : "老谭的奶茶屋",
+    "name" : "校园综合服务平台",
     "appid" : "__UNI__9B90031",
     "description" : "",
     "versionName" : "1.0.0",
@@ -51,7 +51,10 @@
     "mp-weixin" : {
         "appid" : "wx30dae6d4ee747155",
         "setting" : {
-            "urlCheck" : true
+            "urlCheck" : true,
+            "es6" : true,
+            "minified" : true,
+            "postcss" : true
         },
         "usingComponents" : true
     },

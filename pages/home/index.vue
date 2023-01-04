@@ -9,23 +9,27 @@
 		</view>
 		<view class="context">
 			<view class="get_container">
-				<view class="left"  @tap="gotoOrder"><img src="/static/home/home_icon_ziqu1.png" alt="" srcset=""><text class="font-20">门店自取</text><text class="font-12">下单免配送费</text></view></navigatorurl>
-				<view class="right" @tap="gotoAddress"><img src="/static/home/home_icon_waimai1.png" alt="" srcset=""><text class="font-20">外卖</text><text class="font-12">无需接触 送喜到家</text></view>
+				<view class="left"  @tap="gotoPulishTreeHole"><img src="/static/媒体发布.png" alt="" srcset="">
+				<text class="font-20">发布树洞</text><text class="font-12">寻物启事 分享欢乐</text>
+				</view>
+				<view class="right" @tap="gotoShop_select"><img src="/static/shiwu.png" alt="" srcset=""><text class="font-20">饭堂点餐</text><text class="font-12">在线点餐 免排队取号</text></view>
 			</view>
 			
 			<view class="credit">
 				<view class="left" @tap="gotoVoucher">
 					<text class="base">我的积分<text class="num">{{credit?credit:0}}</text></text>
-					<text class="assist">可兑换喜茶券和丰富灵感周边</text>
+					<text class="assist">可兑换优惠券和丰富灵感周边</text>
 				</view>
 				<view class="right" @tap="gotoCode">
-					<image src="../../static/home/home_icon_erweima.png" mode=""></image>
+					<image src="../../static/home_icon_erweima.png" mode=""></image>
 					<text class="assist">会员码</text>
 				</view>
 			</view>
 			
-			<view class="image">
-				<image src="../../static/home/封面图.jpg" mode="widthFix" ></image>
+			<view class="image" @click="gotoTreeHole">
+
+					<image src="../../static/shudon.jpg" mode="widthFix" ></image>
+				
 			</view>
 		</view>
 	</view>
@@ -37,11 +41,10 @@
 		data() { 
 			return {
 				swipers: [
-					"https://go.cdn.heytea.com/storage/ad/2020/05/21/bfd57914d80d4671b19f5d0ccc176cd5.jpg",
-					"https://go.cdn.heytea.com/storage/ad/2020/05/24/49f9b50738dd47878cf1ab54c2eee2e0.jpg",
-					"https://go.cdn.heytea.com/storage/ad/2020/05/01/e1c6915022c849fd9492377021aef454.jpg",
-					"https://go.cdn.heytea.com/storage/ad/2020/04/27/db60b797c1cd4afabe9666e7df958ffd.jpg",
-					"https://go.cdn.heytea.com/storage/ad/2020/05/21/4ba53dda599345bdaf28a08420dd1b6f.jpg"
+					"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-60629e12-38df-4763-b955-ace6cc304213/a3ddf7bc-6f58-46d9-8d17-2d690cfdf7ad.jpg",
+					"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-60629e12-38df-4763-b955-ace6cc304213/e8806289-431a-44b8-bb62-d1a1cb976a6e.jpg",
+					"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-60629e12-38df-4763-b955-ace6cc304213/aab51310-1bfc-4818-a6ca-b1e9c35c6437.jpg",
+					"https://vkceyugu.cdn.bspapp.com/VKCEYUGU-60629e12-38df-4763-b955-ace6cc304213/2dcd1af0-ff5c-4f13-8819-6264c36bf112.jpg",
 				],
 				
 			}
@@ -63,16 +66,24 @@
 					url:'/pages/user/code/code'
 				},true)
 			},
-			gotoOrder(){
-				uni.switchTab({
-					url: '/pages/purchase/purchase'
-				});
+			gotoPulishTreeHole(){
+				// uni.switchTab({
+				// 	url: '/pages/purchase/purchase'
+				// });
+				uni.navigateTo({
+					url:'/pages/treeHole/publish'
+				},true)
 				console.log(123)
 			},
-			gotoAddress(){
+			gotoTreeHole(){
 				uni.navigateTo({
-					url:'/pages/user/address/address'
+					url:'/pages/treeHole/treeHole'
 				},true)
+			},
+			gotoShop_select(){
+				uni.switchTab({
+					url:'/pages/purchase/shop_select'
+				})
 			},
 			gotoVoucher(){
 				uni.navigateTo({
@@ -82,15 +93,16 @@
 			},
 		async onLoad() {
 			//判断是否登录，如果用户名不存在则登录
-			if(!uni.getStorageInfoSync('user_name')){
-				this.$store.dispatch('login') 
-			}
+			// if(!uni.getStorageInfoSync('user_name')){
+			// 	this.$store.dispatch('login') 
+			// }
 			
 			let openid = uni.getStorageSync('openid')
-			// console.log("openid:",openid);
+			console.log("openid:",openid);
 			if(openid){
-				await this.$store.dispatch('getUserInfo',openid);
+				await this.$store.dispatch('login',true);
 				// this.credit = this.$store.state.user.userinfo.user_credit
+				
 				console.log(this.$store.state.user.userinfo.user_credit);
 			}
 			
@@ -147,30 +159,38 @@
 				margin-bottom: 20rpx;
 			}
 			.right{
-				&:nth-child(1):after {
-					content: '';
-					position: absolute;
-					right: -60rpx;
-					top: 0;
-					bottom: 0;
-					width: 2rpx;
-					background-color: #cccccc;
-				}
-					margin-right: 10rpx;
+				// &:nth-child(1):after {
+				// 	content: '';
+				// 	position: absolute;
+				// 	right: -60rpx;
+				// 	top: 0;
+				// 	bottom: 0;
+				// 	width: 2rpx;
+				// 	background-color: #cccccc;
+				// }
+					width: 50%;
+					// margin-right: 10rpx;
 					display: flex;
 					flex-direction: column;
 					position: relative;
 					justify-content: space-between;
 					align-items: center;
 					img{
-						height: 120rpx;
-						width: 120rpx;
+						height: 115rpx;
+						width: 115rpx;
 						margin-bottom: 20rpx;
 					}
 					
 			}
 			.left{
-				@extend .right
+				@extend .right;
+				margin-top: 5rpx;
+				img{
+					height: 110rpx;
+					width: 110rpx;
+					// margin-bottom: 30rpx;
+				}
+				border-right: 2rpx solid #cccccc;;
 			}
 			
 		}
@@ -179,7 +199,8 @@
 			margin-top: 60rpx;
 			width: 100%;
 			image{
-				border-radius: 20rpx;
+				border-radius: 5rpx;
+				border: 1rpx solid #a3a3a3;
 				width: 100%;
 			}
 		}

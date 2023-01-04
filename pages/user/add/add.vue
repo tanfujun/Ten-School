@@ -26,8 +26,10 @@
 					<text>设为默认地址</text>
 
 		</view>
-		<Button text="保存" @tap="update" style="margin-top: 20rpx;"></Button>
-		
+		<view style="width:100%;display: flex;justify-content:center;position: fixed;bottom: 40rpx;">
+			<tan-button  width="650rpx" text="保存" @tap="update"></tan-button>
+		</view>
+		<u-toast ref="uToast"></u-toast>
 	</view>
 </template> 
 
@@ -67,29 +69,49 @@
 				this.address.user_id = uni.getStorageSync('openid')
 				try{
 					if(this.address_id){
-						console.log(this.address,this.address_id);
-						await addressCloud.updateAddress(this.address,this.address_id) 
-						uni.showToast({
-							title:'保存成功！'
+						if(this.address.address == ''||this.address.name == ''||this.address.phone == ''||this.address.sex == ''){
+								this.$refs.uToast.show({
+							type: 'error',
+							icon: false,
+							message: "请将信息补全！",
+							iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/error.png'
 						})
-						// uni.navigateTo({
-						// 	url:'/pages/user/address/address'
-						// })
-						uni.navigateBack({
-							success:function(){
-								beforePage.onLoad()
-							}
-						})
+						}else{
+							console.log(this.address,this.address_id);
+							await addressCloud.updateAddress(this.address,this.address_id) 
+							uni.showToast({
+								title:'保存成功！'
+							})
+							// uni.navigateTo({
+							// 	url:'/pages/user/address/address'
+							// })
+							uni.navigateBack({
+								success:function(){
+									beforePage.onLoad()
+								}
+							})
+						}
+
 					}else{
-						await addressCloud.updateAddress(this.address) 
-						uni.navigateBack({
-							success:function(){
-								beforePage.onLoad()
-							}
-						})
-						uni.showToast({
-							title:'保存成功！'
-						})
+						if(this.address.address == ''||this.address.name == ''||this.address.phone == ''||this.address.sex == ''){
+							this.$refs.uToast.show({
+						type: 'error',
+						icon: false,
+						message: "请将信息补全！",
+						iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/error.png'
+					})
+						}else{
+							await addressCloud.updateAddress(this.address)
+							uni.navigateBack({
+								success:function(){
+									beforePage.onLoad()
+								}
+							})
+							uni.showToast({
+								title:'保存成功！'
+							})
+						}
+
 					}
 				}catch(e){
 					uni.showToast({

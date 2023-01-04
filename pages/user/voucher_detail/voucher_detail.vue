@@ -41,6 +41,7 @@
 							<uni-popup-dialog type="info" cancelText="关闭" confirmText="兑换" content="你确定要兑换该优惠券吗？" @confirm="dialogConfirm"
 								></uni-popup-dialog>
 			</uni-popup>
+			<u-toast ref="uToast"></u-toast>
 	</view>
 </template> 
 
@@ -67,8 +68,10 @@
 				let result = await voucherCloud.addUserVoucher(this.voucher._id,user_id,newCredit)
 				if(result.status === 200){
 					this.$store.dispatch('getUserInfo')
-					uni.showToast({
-						title:'兑换成功！'
+					this.$refs.uToast.show({
+						type: 'default',
+						message: "兑换成功！",
+						iconUrl: 'https://cdn.uviewui.com/uview/demo/toast/default.png'
 					})
 				}else{
 					uni.showToast({
